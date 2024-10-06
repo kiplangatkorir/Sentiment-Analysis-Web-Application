@@ -1,4 +1,3 @@
-
 # Sentiment Analysis Web Application
 
 This project is a simple web application that performs sentiment analysis on user-provided text. It uses Flask for the backend, TextBlob for sentiment analysis, and a basic HTML/JavaScript frontend.
@@ -50,28 +49,41 @@ To use the Sentiment Analysis Web Application, follow these steps:
 
 3. Enter text in the provided text area and click "Analyze" to see the sentiment analysis result
 
-## Deploying to Heroku
+## Deploying to Render
 
-To deploy this application to Heroku, follow these steps:
+Render is a cloud platform that offers free hosting for web services. Here's how to deploy your application to Render:
 
-1. Sign up for a free Heroku account if you don't have one
-2. Install the Heroku CLI on your local machine
-3. Login to Heroku from the CLI:
-   ```
-   heroku login
-   ```
-4. Create a new Heroku app:
-   ```
-   heroku create your-app-name
-   ```
-5. Push your code to Heroku:
-   ```
-   git push heroku main
-   ```
-6. Open your app in the browser:
-   ```
-   heroku open
-   ```
+1. Sign up for a free account at [render.com](https://render.com)
+
+2. From your dashboard, click on "New +" and select "Web Service"
+
+3. Connect your GitHub repository or manually specify your repository URL
+
+4. Configure your web service:
+   - Name: Choose a name for your service
+   - Environment: Select "Python 3"
+   - Build Command: `pip install -r requirements.txt`
+   - Start Command: `gunicorn app:app`
+
+5. Click "Create Web Service"
+
+Render will automatically deploy your application. Once the deployment is complete, you'll receive a URL where your app is hosted.
+
+### Additional Configuration
+
+1. Create a `render.yaml` file in your project root:
+
+```yaml
+services:
+  - type: web
+    name: sentiment-analysis-app
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.9.0
+```
 
 ## Contributing to Sentiment Analysis Web Application
 
@@ -92,4 +104,3 @@ If you want to contact me, you can reach me at `<korirkiplangat22@gmail.com>`.
 ## License
 
 This project uses the following license: [MIT License](<link_to_license>).
-```
