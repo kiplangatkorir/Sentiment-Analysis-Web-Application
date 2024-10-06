@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Analysis</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        textarea { width: 100%; height: 100px; margin-bottom: 10px; }
+        button { padding: 10px 20px; }
+        #result { margin-top: 20px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Sentiment Analysis</h1>
+    <textarea id="text" placeholder="Enter text to analyze"></textarea>
+    <button onclick="analyzeSentiment()">Analyze</button>
+    <div id="result"></div>
+
+    <script>
+        async function analyzeSentiment() {
+            const text = document.getElementById('text').value;
+            const result = document.getElementById('result');
+            
+            try {
+                const response = await axios.post('/analyze', { text });
+                result.textContent = `Sentiment: ${response.data.sentiment}`;
+            } catch (error) {
+                result.textContent = 'Error analyzing sentiment';
+                console.error(error);
+            }
+        }
+    </script>
+</body>
+</html>
